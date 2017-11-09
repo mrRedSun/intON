@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntON_programmingLanguage", "IntON_programmingLanguage\IntON_programmingLanguage.csproj", "{AA127EA2-AA9A-4163-9282-5FE7DD2E9B4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA127EA2-AA9A-4163-9282-5FE7DD2E9B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA127EA2-AA9A-4163-9282-5FE7DD2E9B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA127EA2-AA9A-4163-9282-5FE7DD2E9B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA127EA2-AA9A-4163-9282-5FE7DD2E9B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C33593D6-982D-40DB-866E-7A3620B70B2C}
+	EndGlobalSection
+EndGlobal

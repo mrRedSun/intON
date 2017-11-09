@@ -1,0 +1,7 @@
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\bin\Debug\IntON_programmingLanguage.exe.config
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\bin\Debug\IntON_programmingLanguage.exe
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\bin\Debug\IntON_programmingLanguage.pdb
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.csprojResolveAssemblyReference.cache
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.csproj.CoreCompileInputs.cache
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.exe
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.pdb
