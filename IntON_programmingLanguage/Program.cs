@@ -28,7 +28,7 @@ namespace IntON_programmingLanguage
             double d =  ss.GetNumber();
 
             Console.WriteLine(d);
-
+            
             Lexer lexer = new Lexer("==while(true == true) { var integer = 5 + 3.534; print (8); }");
 
         }

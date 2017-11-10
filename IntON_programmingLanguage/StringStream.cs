@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
+    /// <summary>
+    /// Basic sting stream for Lexer
+    /// </summary>
     class StringStream
     {
         private string source;
 
         private int currentPos;
-        private int CurrentPos
+        /// <summary>
+        /// Parameter with out of range check for setter
+        /// </summary>
+        private int CurrentPos 
         {
             get
             {
@@ -28,20 +34,38 @@ namespace IntON_programmingLanguage
             }
         }
 
+        /// <summary>
+        /// Basic indexer for sting
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public char this[int index]
         {
             get
             {
+                if(index >= source.Length || index < 0)
+                {
+                    throw new IndexOutOfRangeException("Indexer out of range");
+                }
                 return source[index];
             }
         }
 
+        /// <summary>
+        /// Creates basic string stream for given string
+        /// </summary>
+        /// <param name="s"></param>
         public StringStream(string s)
         {
             source = s;
             CurrentPos = 0;
         }
 
+
+        /// <summary>
+        /// Returns current character from the stream, shifts stream index to the right
+        /// </summary>
+        /// <returns> Current character in the stream </returns>
         public char Get()
         {
             if (currentPos == source.Length)
@@ -51,6 +75,10 @@ namespace IntON_programmingLanguage
             return source[currentPos++];
         }
 
+        /// <summary>
+        /// Returns current character in the stream
+        /// </summary>
+        /// <returns>Current character</returns>
         public char Peek()
         {
             if (currentPos >= source.Length)
@@ -60,11 +88,18 @@ namespace IntON_programmingLanguage
             return source[currentPos];
         }
 
+        /// <summary>
+        /// Shifts stream indexer to the right for given distance
+        /// </summary>
         public void Shift(int distance)
         {
             currentPos += distance;
         }
 
+        /// <summary>
+        /// Sets stream indexer to the given position
+        /// </summary>
+        /// <param name="pos"> Position to shift to </param>
         public void Seek(int pos)
         {
             if (source.Length <= pos)
@@ -74,6 +109,9 @@ namespace IntON_programmingLanguage
             CurrentPos = pos;
         }
 
+        /// <summary>
+        /// Shifts stream one character to the left
+        /// </summary>
         public void Putback()
         {
             if (currentPos == 0)
@@ -83,7 +121,8 @@ namespace IntON_programmingLanguage
             currentPos--;
         }
 
-        public bool IsCurrentDigit()
+       
+        private bool IsCurrentDigit()
         {
             if (Peek() >= '0' && Peek() <= '9')
             {
@@ -92,6 +131,10 @@ namespace IntON_programmingLanguage
             return false;
         }
 
+        /// <summary>
+        /// Parses and returns floating-point number from the stream
+        /// </summary>
+        /// <returns> Double number </returns>
         public double GetNumber()
         {
             string numberStr = "";
@@ -119,30 +162,38 @@ namespace IntON_programmingLanguage
             return double.Parse(numberStr);
         }
 
+        /// <summary>
+        /// Returns number of character before the end of the stream
+        /// </summary>
         public int GetCharsLeft()
         {
             return source.Length - CurrentPos;
         }
 
 
-
-        public string PeekSlice(int start, int end)
+        /// <summary>
+        /// Gets string of given length from the stream
+        /// </summary>
+        /// <param name="len"> Length of a string user wants to get</param>
+        public string PeekSlice(int len)
         {
-            return source.Substring(start, end);
+            return source.Substring(CurrentPos, len);
         }
 
-        public string PeekSlice(int end)
+        /// <summary>
+        /// Gets string of given length from the stream, and shifts the stream
+        /// </summary>
+        /// <param name="len"> Length of a string user wants to get</param>
+        public string GetSlice(int len)
         {
-            return source.Substring(CurrentPos, end);
-        }
-
-        public string GetSlice(int end)
-        {
-            string temp = source.Substring(currentPos, end);
-            CurrentPos += end;
+            string temp = source.Substring(currentPos, len);
+            Shift(len);
             return temp;
         }
 
+        /// <summary>
+        /// Returns bool that tells if the stream has ended
+        /// </summary>
         public bool Eof()
         {
             if (currentPos >= source.Length)
