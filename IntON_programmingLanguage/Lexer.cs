@@ -40,6 +40,9 @@ namespace IntON_programmingLanguage
             {
                 char current = stringStream.Get();
 
+                while (!stringStream.Eof() && current == ' ' || current == '\n')
+                    current = stringStream.Get();
+
                 if ('0' <= current && current <= '9') // check if current character is a digit
                 {
                     stringStream.Putback();
@@ -48,13 +51,13 @@ namespace IntON_programmingLanguage
                 }
 
                 bool isFound = false;
-                
+
                 for (int i = 0; i < keywords.Length; i++) // checks if current character is a start of some of operators
                 {
                     if (current == keywords[i][0])
                     {
                         stringStream.Putback();
-                        
+
 
                         if (stringStream.GetCharsLeft() >= keywords[i].Length && // Checks if the stream can provide enough characters for slice
                             stringStream.PeekSlice(keywords[i].Length) == keywords[i])
@@ -69,33 +72,34 @@ namespace IntON_programmingLanguage
                         {
                             stringStream.Get(); // to omit infinite loop, get character back from stream
                         }
-                    } 
+                    }
                 }
-
                 if (isFound == true) continue; // if the token is found, continue searching
 
 
-            //    for (int i = 0; i < separators.Length; i++)
-            //    {
-            //        if (current == separators[i][0])
-            //        {
-            //            stringStream.Putback();
+                // -------------------
+                string id = "";
+                while ((current >= 'A' && current <= 'Z') ||
+                       (current >= 'a' && current <= 'z'))
+                {
+                    id += current;
+                    if (!stringStream.Eof()) current = stringStream.Get();
+                    else break;
+                }
 
-            //            if (stringStream.GetCharsLeft() >= operators[i].Length && // Checks if the stream can provide enough characters for slice
-            //                stringStream.PeekSlice(operators[i].Length) == operators[i])
-            //            {
-            //                tokenList.Add(new Token(Token_type.SEPARATOR, stringStream.GetSlice(separators[i].Length)));
-            //                Console.WriteLine(separators[i]);
-            //                isFound = true;
-            //                break;
-            //            }
-            //            else
-            //            {
-            //                stringStream.Get(); // to omit infinite loop, get character back from stream
-            //            }
-            //        }
-            //    } if (isFound == true) continue; // if the token is found, continue searching
+                tokenList.Add(new Token(Token_type.ID, id));
+                // --------------------
+
+                if (id == "")
+                {
+                    tokenList.Add(new Token(Token_type.INVALID_TOKEN));
+                }
             }
+
+            foreach(Token t in tokenList) {
+                Console.WriteLine(t.Type);
+            }
+
 
         }
 

@@ -18,7 +18,9 @@ namespace IntON_programmingLanguage
 
         SEMICOLON, OPEN_BRACKET, CLOSE_BRACKET, 
 
-        NUMBER
+        NUMBER, ID,
+
+        INVALID_TOKEN
     };
 
     class Token
