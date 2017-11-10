@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
+
     enum Token_type
     {
-        VARIABLE, NUMBER, IDENTIFIER, PLUS, MINUS, DIVIDE, MULTIPLY, OPEN_PARENTHESIS, CLOSE_PARANTHESIS, OPEN_BRACKET, CLOSE_BRACKET, PRINT, BOOL, WHILE
-    }
+        FALSE, PRINT, WHILE, VARIABLE, TRUE, IF,
+        EQUAL, NOT_EQUAL,
+
+        PLUS, MINUS, MULTIPLY,
+        DIVIDE, ASSIGN, GREATER_THAN, LESS_THAN,
+        OPEN_PARENTHESIS, CLOSE_PARANTHESIS,
+
+        SEMICOLON, OPEN_BRACKET, CLOSE_BRACKET, 
+
+        NUMBER
+    };
 
     class Token
     {

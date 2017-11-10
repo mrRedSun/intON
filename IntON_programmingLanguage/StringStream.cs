@@ -53,11 +53,16 @@ namespace IntON_programmingLanguage
 
         public char Peek()
         {
-            if (currentPos == source.Length)
+            if (currentPos >= source.Length)
             {
                 throw new IndexOutOfRangeException("You've reached end of stream (peek)");
             }
             return source[currentPos];
+        }
+
+        public void Shift(int distance)
+        {
+            currentPos += distance;
         }
 
         public void Seek(int pos)
@@ -114,14 +119,28 @@ namespace IntON_programmingLanguage
             return double.Parse(numberStr);
         }
 
-        public string GetSlice(int start, int end)
+        public int GetCharsLeft()
+        {
+            return source.Length - CurrentPos;
+        }
+
+
+
+        public string PeekSlice(int start, int end)
         {
             return source.Substring(start, end);
         }
 
-        public string GetSlice(int end)
+        public string PeekSlice(int end)
         {
             return source.Substring(CurrentPos, end);
+        }
+
+        public string GetSlice(int end)
+        {
+            string temp = source.Substring(currentPos, end);
+            CurrentPos += end;
+            return temp;
         }
 
         public bool Eof()
