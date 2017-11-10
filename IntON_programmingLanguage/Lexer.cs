@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace IntON_programmingLanguage
 {
@@ -22,7 +21,7 @@ namespace IntON_programmingLanguage
             "false",  "print", "while", "var ", "true",  "if",
         //   6     7    8    9    10   11    12   13   14    15  16
             "==", "!=", "+", "-", "*", "/", "=", ">", "<",  "(", ")",
-         //  17    18    19
+         //  17   18  19
             ";", "{", "}"
         };
         
@@ -46,7 +45,7 @@ namespace IntON_programmingLanguage
 
         private void Tokenize() // Parses code and creates
         {
-            StringStream stringStream = new StringStream(sourceCode);
+            var stringStream = new StringStream(sourceCode);
 
             while (!stringStream.Eof())
             {

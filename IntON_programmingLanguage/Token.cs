@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
-
+   
     enum Token_type
     {
         FALSE, PRINT, WHILE, VARIABLE, TRUE, IF,
@@ -23,11 +23,13 @@ namespace IntON_programmingLanguage
         INVALID_TOKEN
     };
 
-    class Token
+    class Token : ParsingUnit
     {
         private readonly Token_type type;
         private readonly string id;
         private readonly double value;
+        private const Unit_type uType = Unit_type.NON_TERMINAL;
+        override public Unit_type UnitType { get { return uType; } }
 
         public string Id
         {

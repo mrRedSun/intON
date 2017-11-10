@@ -11,7 +11,7 @@ namespace IntON_programmingLanguage
     /// </summary>
     class StringStream
     {
-        private string source;
+        readonly private string source;
 
         private int currentPos;
         /// <summary>
@@ -118,7 +118,7 @@ namespace IntON_programmingLanguage
             {
                 throw new IndexOutOfRangeException("Can't putback when current pos = 0");
             }
-            currentPos--;
+            CurrentPos--;
         }
 
        

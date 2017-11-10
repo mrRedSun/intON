@@ -20,16 +20,7 @@ namespace IntON_programmingLanguage
 
         static void Main(string[] args)
         {
-
-            String s = "1534.1234";
-            Console.WriteLine(s.Substring(0, s.Length));
-            StringStream ss = new StringStream(s);
-
-            double d =  ss.GetNumber();
-
-            Console.WriteLine(d);
-            
-            Lexer lexer = new Lexer("==while(true == true) { var integer = 5 + 3.534; print (8); }");
+            Lexer lexer = new Lexer("while(true == true) { var integer = 5 + 3.534; print (8); }");
 
         }
     }
