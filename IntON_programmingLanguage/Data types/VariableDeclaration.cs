@@ -6,27 +6,30 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
-    class VariableDeclaration : StatementBase
+    class VariableDeclaration : ParsingUnit, IExecutable
     {
         private string id;
-        private MathExpression expr;
-        private CodeBlock.VarAdder Add;
+        private ICalculatable expr;
+        private CodeBlock.VarAdder AddVar;
+        private CodeBlock.VarGetter GetVar;
 
-        public VariableDeclaration(string identifier, MathExpression expression)
+        public VariableDeclaration(string identifier, ICalculatable expression)
         {
             id = identifier;
             expr = expression;
         }
-
-        public void SetDelegate(CodeBlock.VarAdder adder)
-        {
-            Add = adder;
-        }
         
 
-        public override void Run()
+        public void Run()
         {
-            Add(id, expr.Evaluate());
+            expr.SetDelegate(GetVar);
+            AddVar(id, expr.Evaluate().Value);
+        }
+
+        public void SetDelegates(CodeBlock.VarAdder adder, CodeBlock.VarGetter getter)
+        {
+            AddVar = adder;
+            GetVar = getter;
         }
     }
 }

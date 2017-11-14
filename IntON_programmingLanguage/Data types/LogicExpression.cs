@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 { 
-    class LogicExpression : ParsingUnit
+    class LogicExpression : ParsingUnit, ICalculatable
     {
         private Queue<Token> logicInfix;
         private Stack<Token> logicPostfix;
@@ -33,7 +33,8 @@ namespace IntON_programmingLanguage
             {
                 Token temp = logicInfix.Dequeue();
 
-                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.VARIABLE)
+                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.ID 
+                    || temp.Type == Token_type.TRUE || temp.Type == Token_type.FALSE)
                 {
                     logicPostfix.Push(temp);
                 }
@@ -72,7 +73,7 @@ namespace IntON_programmingLanguage
             }
         }
 
-        public double Evaluate()
+        public Token Evaluate()
         {
             Stack<Token> functionListCopy = new Stack<Token>(logicPostfix);
             functionListCopy.Reverse();
@@ -80,11 +81,11 @@ namespace IntON_programmingLanguage
             while (functionListCopy.Count != 0)
             {
                 Token temp = functionListCopy.Pop();
-                if (temp.Type == Token_type.NUMBER)
+                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.FALSE || temp.Type == Token_type.TRUE)
                 {
                     output.Push(temp);
                 }
-                else if (temp.Type == Token_type.VARIABLE)
+                else if (temp.Type == Token_type.ID)
                 {
                     output.Push(new Token(Token_type.NUMBER, getVar(temp.Id)));
                 }
@@ -94,7 +95,7 @@ namespace IntON_programmingLanguage
                 }
             }
 
-            return output.Pop().Value;
+            return output.Pop();
         }
 
         void DoOperator(Token opertr)
@@ -104,24 +105,24 @@ namespace IntON_programmingLanguage
 
             switch (opertr.Type)
             {
-                case Token_type.PLUS:
-                    output.Push(new Token(Token_type.NUMBER, rVal + lVal));
+                case Token_type.EQUAL:
+                    if (rVal == lVal) output.Push(new Token(Token_type.TRUE));
+                    else output.Push(new Token(Token_type.FALSE));
                     break;
-                case Token_type.MINUS:
-                    output.Push(new Token(Token_type.NUMBER, lVal - rVal));
+                case Token_type.LESS_THAN:
+                    if (rVal > lVal) output.Push(new Token(Token_type.TRUE));
+                    else output.Push(new Token(Token_type.FALSE));
                     break;
-                case Token_type.MULTIPLY:
-                    output.Push(new Token(Token_type.NUMBER, lVal * rVal));
+                case Token_type.GREATER_THAN:
+                    if (rVal < lVal) output.Push(new Token(Token_type.TRUE));
+                    else output.Push(new Token(Token_type.FALSE));
                     break;
-                case Token_type.DIVIDE:
-                    if (rVal == 0)
-                    {
-                        throw new DivideByZeroException("Zero division error");
-                    }
-                    output.Push(new Token(Token_type.NUMBER, lVal / rVal));
+                case Token_type.NOT_EQUAL:
+                    if (rVal != lVal) output.Push(new Token(Token_type.TRUE));
+                    else output.Push(new Token(Token_type.FALSE));
                     break;
                 default:
-                    throw new Exception("MATH EXPRESSION ERROR");
+                    throw new Exception("LOGIC EXPRESSION ERROR");
             }
 
         }

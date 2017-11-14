@@ -44,6 +44,7 @@ namespace IntON_programmingLanguage
                         currentState = ParserState.IF_STATEMENT;
                         break;
                     case Token_type.PRINT:
+                        parsingStack.Push(currentToken);
                         currentState = ParserState.PRINT_EXPRESSION;
                         break;
                     case Token_type.WHILE:
@@ -56,11 +57,37 @@ namespace IntON_programmingLanguage
                 while (currentToken.Type != Token_type.SEMICOLON)
                 {
                     currentToken = tokenStream.GetToken();
+                    parsingStack.Push(currentToken);
                 }
-                tokenStream.GetToken();
+                parsingStack.Pop(); // Getting rid of semicolon;
 
                 CompleteState();
             }
+
+            Pack();
+        }
+
+        public CodeBlock GetProgram()
+        {
+            return (CodeBlock) parsingStack.Pop();
+        }
+
+        private void Pack()
+        {
+            var statements = new List<IExecutable>();
+            IExecutable temp;
+
+            while (parsingStack.Count != 0)
+            {
+                temp = (IExecutable) parsingStack.Pop();
+                statements.Add(temp);
+            }
+
+            statements.Reverse();
+
+            CodeBlock programm = new CodeBlock(statements);
+
+            parsingStack.Push(programm);
         }
 
         private void CompleteState()
@@ -71,6 +98,7 @@ namespace IntON_programmingLanguage
                     ReduceVariable();
                     break;
                 case ParserState.PRINT_EXPRESSION:
+                    ReducePrint();
                     break;
                 case ParserState.IF_STATEMENT:
                     break;
@@ -86,12 +114,16 @@ namespace IntON_programmingLanguage
             Token temp;
             var exprQ = new Queue<Token>();
 
+
+            bool isLogic = false;
             do
             {
-                temp = (Token)parsingStack.Pop();
-                if (temp.Type == Token_type.TRUE)
+                temp = (Token)parsingStack.Pop(); if (temp.Type == Token_type.ASSIGN) break; // getting rid of '=' sign
+                Console.WriteLine($"Tuda-suda {temp.Type}");
+                if (temp.Type == Token_type.GREATER_THAN || temp.Type == Token_type.LESS_THAN
+                    || Token_type.EQUAL == temp.Type || Token_type.NOT_EQUAL == temp.Type)
                 {
-                    
+                    isLogic = true;
                 }
 
 
@@ -100,9 +132,18 @@ namespace IntON_programmingLanguage
                 
             } while (temp.Type != Token_type.ASSIGN);
 
-            exprQ.Reverse();
+            exprQ = new Queue<Token>(exprQ.Reverse());
 
-            var expr = new MathExpression(exprQ);
+            ICalculatable expr;
+
+            if (isLogic)
+            {
+                expr = new LogicExpression(exprQ);
+            }
+            else
+            {
+                expr = new MathExpression(exprQ);
+            }
             string id = ((Token)parsingStack.Pop()).Id;
 
             var declaration = new VariableDeclaration(id, expr);
@@ -112,7 +153,46 @@ namespace IntON_programmingLanguage
 
         private void ReducePrint()
         {
+            Token temp;
+            var exprQ = new Queue<Token>();
 
+            bool isLogic = false;
+            
+            do
+            {
+                temp = (Token)parsingStack.Pop(); if (temp.Type == Token_type.PRINT) break;
+
+                Console.WriteLine($"Tuda-suda {temp.Type}"); // TODO: DELETE
+
+                if (temp.Type == Token_type.GREATER_THAN || temp.Type == Token_type.LESS_THAN
+                    || Token_type.EQUAL == temp.Type || Token_type.NOT_EQUAL == temp.Type)
+                {
+                    isLogic = true;
+                }
+
+
+                exprQ.Enqueue(temp);
+
+
+            } while (temp.Type != Token_type.PRINT);
+
+            exprQ = new Queue<Token>(exprQ.Reverse());
+
+            ICalculatable expr;
+
+            if (isLogic)
+            {
+                expr = new LogicExpression(exprQ);
+            }
+            else
+            {
+                expr = new MathExpression(exprQ);
+            }
+
+
+            var print = new PrintExpression(expr);
+
+            parsingStack.Push(print);
         }
 
         private void ReduceLogic()

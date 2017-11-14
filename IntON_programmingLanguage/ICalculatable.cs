@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
-    interface IExecutable 
+    interface ICalculatable
     {
-        void Run();
-        void SetDelegates(CodeBlock.VarAdder adder, CodeBlock.VarGetter getter);
+        Token Evaluate();
+        void SetDelegate(CodeBlock.VarGetter getter);
     }
 }

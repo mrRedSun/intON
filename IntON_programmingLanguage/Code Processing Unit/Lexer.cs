@@ -37,7 +37,7 @@ namespace IntON_programmingLanguage
         public Lexer(string source)
         {
             tokenList = new List<Token>();
-            sourceCode = source;
+            sourceCode = source.Trim();
             Tokenize();
         }
 
@@ -51,7 +51,7 @@ namespace IntON_programmingLanguage
             {
                 char current = stringStream.Get();
 
-                while (!stringStream.Eof() && current == ' ' || current == '\n') // skips all the whitespace
+                while (!stringStream.Eof() && (current == ' ' || current == '\n')) // skips all the whitespace
                     current = stringStream.Get();
 
                 if ('0' <= current && current <= '9') // check if current character is a digit
@@ -90,20 +90,26 @@ namespace IntON_programmingLanguage
 
                 // ---------- if current character isn't one of keywords or number, check if it's a keyword
                 string id = "";
+
+
                 while ((current >= 'A' && current <= 'Z') || // keywords should only contain letters for A to z
                        (current >= 'a' && current <= 'z'))
                 {
                     id += current; // add character to id string
-                    if (!stringStream.Eof()) current = stringStream.Get();
+                    if (!stringStream.Eof() && 
+                        ((stringStream.Peek() >= 'A' && stringStream.Peek() <= 'Z') || 
+                       (stringStream.Peek() >= 'a' && stringStream.Peek() <= 'z'))) current = stringStream.Get(); 
                     else break; // break, if the stream has ended
                 }
+
+                //stringStream.Putback();
 
                 if (id != "") tokenList.Add(new Token(Token_type.ID, id)); // checks, if any characters were added to a string
                 else tokenList.Add(new Token(Token_type.INVALID_TOKEN, current)); // if not, create now token with id of Invaild character
             }
 
             foreach(Token t in tokenList) {
-                Console.WriteLine(t.Type);
+                Console.Write($"{t.Type} ");
             }
 
 

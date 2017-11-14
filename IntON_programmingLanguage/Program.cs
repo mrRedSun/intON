@@ -17,24 +17,25 @@ namespace IntON_programmingLanguage
     {
 
 
-
         static void Main(string[] args)
         {
             //Lexer lexer = new Lexer("while(true == true) { var integer = 5 + 3.534; print (8); }");
+            //var Le = new Lexer("print(id);");
+            var Lexerz = new Lexer("var idd = (5+5/5-8*0 + 3*0); var ccd = idd / 3; print(idd + ccd); ");
 
-            var Lexerz = new Lexer("(3-3)*5-6/6");
+            var tt = new Queue<int>();
+            tt.Enqueue(5);
+            tt.Enqueue(6);
+            tt.Enqueue(7);
 
+            tt = new Queue<int>(tt.Reverse());
 
-            Dictionary<string, double> dictionary = new Dictionary<string, double>
-            {
-                { "var", 5 }
-            };
+            Console.WriteLine(tt.Dequeue());
 
+            List<Token> queu = new List<Token>(Lexerz.GetList);
+            var parser = new Parser(queu);
 
-            Queue<Token> queu = new Queue<Token>(Lexerz.GetList);
-            MathExpression mathExpression = new MathExpression(queu, null);
-            Console.WriteLine("Result: " + mathExpression.Evaluate());
-           
+            parser.GetProgram().Run();
 
         }
     }

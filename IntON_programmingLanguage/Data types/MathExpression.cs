@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
-    class MathExpression : ParsingUnit
+    class MathExpression : ParsingUnit, ICalculatable
     {
         private Queue<Token> functionInfix;
         private Stack<Token> functionPostfix;
@@ -33,7 +33,7 @@ namespace IntON_programmingLanguage
             {
                 Token temp = functionInfix.Dequeue();
 
-                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.VARIABLE)
+                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.ID)
                 {
                     functionPostfix.Push(temp);
                 }
@@ -73,7 +73,7 @@ namespace IntON_programmingLanguage
             }
         }
 
-        public double Evaluate()
+        public Token Evaluate()
         {
             Stack<Token> functionListCopy = new Stack<Token>(functionPostfix);
             functionListCopy.Reverse();
@@ -85,7 +85,7 @@ namespace IntON_programmingLanguage
                 {
                     output.Push(temp);
                 }
-                else if (temp.Type == Token_type.VARIABLE)
+                else if (temp.Type == Token_type.ID)
                 {
                     output.Push(new Token(Token_type.NUMBER, getVar(temp.Id)));
                 }
@@ -95,7 +95,7 @@ namespace IntON_programmingLanguage
                 }
             }
 
-            return output.Pop().Value;
+            return output.Pop();
         }
 
         void DoOperator(Token opertr)

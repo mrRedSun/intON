@@ -22,7 +22,7 @@ namespace IntON_programmingLanguage
             }
             set
             {
-                if (value >= tokenList.Count)
+                if (value > tokenList.Count)
                 {
                     throw new IndexOutOfRangeException("StringStream currentPos setter out of range error");
                 }

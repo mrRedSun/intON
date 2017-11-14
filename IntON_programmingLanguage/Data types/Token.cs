@@ -59,6 +59,14 @@ namespace IntON_programmingLanguage
         public Token(Token_type tp)
         {
             type = tp;
+            if (type == Token_type.TRUE)
+            {
+                value = 1;
+            } 
+            else if (type == Token_type.FALSE)
+            {
+                value = 0;
+            }
         }
 
         public Token(Token_type tp, double value)
