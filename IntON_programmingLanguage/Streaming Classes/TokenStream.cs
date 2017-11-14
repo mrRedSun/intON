@@ -34,7 +34,7 @@ namespace IntON_programmingLanguage
         public TokenStream(List<Token> list)
         {
             currentPos = 0;
-            tokenList = list;
+            tokenList = new List<Token>(list);
         }
 
 

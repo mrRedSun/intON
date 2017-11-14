@@ -144,7 +144,7 @@ namespace IntON_programmingLanguage
                 numberStr += Get();
             }
 
-            if (this.Peek() == ',' || this.Peek() == '.')
+            if (!Eof() && (Peek() == ',' || Peek() == '.'))
             {
                 Get();
 

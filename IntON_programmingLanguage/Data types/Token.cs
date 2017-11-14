@@ -30,6 +30,7 @@ namespace IntON_programmingLanguage
         private readonly double value;
         private const Unit_type uType = Unit_type.NON_TERMINAL;
         override public Unit_type UnitType { get { return uType; } }
+        
 
         public string Id
         {
