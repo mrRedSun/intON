@@ -52,12 +52,14 @@
     <Compile Include="Code Processing Unit\Parser.cs" />
     <Compile Include="Data types\StatementBase.cs" />
     <Compile Include="Data types\ParsingUnit.cs" />
+    <Compile Include="Data types\VariableReassignment.cs" />
     <Compile Include="ICalculatable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Streaming Classes\StringStream.cs" />
     <Compile Include="Data types\Token.cs" />
     <Compile Include="Streaming Classes\TokenStream.cs" />
+    <Compile Include="WhileStatement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

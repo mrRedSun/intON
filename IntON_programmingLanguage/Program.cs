@@ -19,18 +19,11 @@ namespace IntON_programmingLanguage
 
         static void Main(string[] args)
         {
-            //Lexer lexer = new Lexer("while(true == true) { var integer = 5 + 3.534; print (8); }");
+            Lexer Lexerz = new Lexer("var i = 0; while (i < 100000) { print (i); i = i + 1; }");
             //var Le = new Lexer("print(id);");
-            var Lexerz = new Lexer("var idd = (5+5/5-8*0 + 3*0); var ccd = idd / 3; print(idd + ccd); ");
+            //var Lexerz = new Lexer("var id = true; if (id) { if (true) { print(id);  if (id) { print(id);} } print(0); }");
+            //var Lexerz = new Lexer("var idd = 0; if (idd == 5) {var idd = 2+2*2; var ccd = idd / 3; print(idd + ccd); print(idd+idd+idd+idd);};");
 
-            var tt = new Queue<int>();
-            tt.Enqueue(5);
-            tt.Enqueue(6);
-            tt.Enqueue(7);
-
-            tt = new Queue<int>(tt.Reverse());
-
-            Console.WriteLine(tt.Dequeue());
 
             List<Token> queu = new List<Token>(Lexerz.GetList);
             var parser = new Parser(queu);

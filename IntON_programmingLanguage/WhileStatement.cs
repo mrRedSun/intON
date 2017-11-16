@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace IntON_programmingLanguage
 {
-    class IfStatement : ParsingUnit, IExecutable
+    class WhileStatement : ParsingUnit, IExecutable
     {
         LogicExpression lExpr;
         CodeBlock cBlock;
         CodeBlock.VarAdder adder;
         CodeBlock.VarGetter getter;
 
-        public IfStatement(LogicExpression expr, CodeBlock block)
+        public WhileStatement(LogicExpression expr, CodeBlock block)
         {
             lExpr = expr;
             cBlock = block;
@@ -24,7 +24,7 @@ namespace IntON_programmingLanguage
             cBlock.SetDelegates(adder, getter);
             lExpr.SetDelegate(getter);
 
-            if (lExpr.Evaluate().Value == 1)
+            while (lExpr.Evaluate().Value == 1)
             {
                 cBlock.Run();
             }
@@ -36,4 +36,5 @@ namespace IntON_programmingLanguage
             getter = _getter;
         }
     }
+
 }

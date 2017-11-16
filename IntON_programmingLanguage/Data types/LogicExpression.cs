@@ -33,8 +33,8 @@ namespace IntON_programmingLanguage
             {
                 Token temp = logicInfix.Dequeue();
 
-                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.ID 
-                    || temp.Type == Token_type.TRUE || temp.Type == Token_type.FALSE)
+                if (temp.Type == Token_type.NUMBER || temp.Type == Token_type.ID ||
+                    temp.Type == Token_type.TRUE || temp.Type == Token_type.FALSE)
                 {
                     logicPostfix.Push(temp);
                 }
@@ -59,7 +59,8 @@ namespace IntON_programmingLanguage
                 }
                 else
                 {
-                    while (operators.Count >= 1)
+                    while (operators.Count >= 1 &&
+                        GetPrecedence(temp) <= GetPrecedence(operators.Peek()))
                     {
                         logicPostfix.Push(operators.Pop());
                     }
@@ -125,6 +126,23 @@ namespace IntON_programmingLanguage
                     throw new Exception("LOGIC EXPRESSION ERROR");
             }
 
+        }
+
+        private int GetPrecedence(Token t)
+        {
+            switch (t.Type)
+            {
+                case Token_type.GREATER_THAN:
+                case Token_type.LESS_THAN:
+                    return 1;
+                case Token_type.EQUAL:
+                case Token_type.NOT_EQUAL:
+                    return 2;
+                case Token_type.OPEN_PARENTHESIS:
+                case Token_type.CLOSE_PARANTHESIS:
+                    return 0;
+            }
+            return -1;
         }
     }
 }

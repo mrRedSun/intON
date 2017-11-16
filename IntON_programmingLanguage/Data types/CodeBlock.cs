@@ -27,11 +27,22 @@ namespace IntON_programmingLanguage
 
         private double GetVar(string id)
         {
-            return variables[id];
+            try
+            {
+                return variables[id];
+            }
+            catch (KeyNotFoundException e)
+            {
+                return getOutterVar(id);
+            }
         }
 
         private void AddVar(string id, double value)
         {
+            if (variables.TryGetValue(id, out double trash))
+            {
+                variables[id] = value; return;
+            }
             variables.Add(id, value);
         }
 
