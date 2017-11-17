@@ -20,11 +20,13 @@ namespace IntON_programmingLanguage.Data_types
         }
 
 
-        public void Run()
+        public void Run(CodeBlock.OutputFunction printF)
         {
             expr.SetDelegate(GetVar);
             AddVar(id, expr.Evaluate().Value);
         }
+
+        
 
         public void SetDelegates(CodeBlock.VarAdder adder, CodeBlock.VarGetter getter)
         {

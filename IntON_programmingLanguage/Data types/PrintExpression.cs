@@ -21,10 +21,10 @@ namespace IntON_programmingLanguage
             getVar = getter;
         }
 
-        public void Run()
+        public void Run(CodeBlock.OutputFunction printF)
         {
             expr.SetDelegate(getVar);
-            Console.WriteLine(expr.Evaluate().Value);
+            printF($"{expr.Evaluate().Value}\n");   
         }
     }
 }

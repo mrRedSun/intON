@@ -8,7 +8,7 @@ namespace IntON_programmingLanguage
 {
     interface IExecutable 
     {
-        void Run();
+        void Run(CodeBlock.OutputFunction printF);
         void SetDelegates(CodeBlock.VarAdder adder, CodeBlock.VarGetter getter);
     }
 }

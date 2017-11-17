@@ -51,7 +51,7 @@ namespace IntON_programmingLanguage
             {
                 char current = stringStream.Get();
 
-                while (!stringStream.Eof() && (current == ' ' || current == '\n')) // skips all the whitespace
+                while (!stringStream.Eof() && (current == ' ' || current == '\n' || current == '\t')) // skips all the whitespace
                     current = stringStream.Get();
 
                 if ('0' <= current && current <= '9') // check if current character is a digit

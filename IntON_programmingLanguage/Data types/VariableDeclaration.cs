@@ -20,7 +20,7 @@ namespace IntON_programmingLanguage
         }
         
 
-        public void Run()
+        public void Run(CodeBlock.OutputFunction printF)
         {
             expr.SetDelegate(GetVar);
             AddVar(id, expr.Evaluate().Value);

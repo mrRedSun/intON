@@ -5,3 +5,5 @@ C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntO
 C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.csproj.CoreCompileInputs.cache
 C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.exe
 C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.pdb
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.MainForm.resources
+C:\Users\PC\Documents\Visual Studio 2017\Projects\IntON_programmingLanguage\IntON_programmingLanguage\obj\Debug\IntON_programmingLanguage.csproj.GenerateResource.Cache

@@ -19,14 +19,14 @@ namespace IntON_programmingLanguage
             cBlock = block;
         }
 
-        public void Run()
+        public void Run(CodeBlock.OutputFunction printF)
         {
             cBlock.SetDelegates(adder, getter);
             lExpr.SetDelegate(getter);
 
             if (lExpr.Evaluate().Value == 1)
             {
-                cBlock.Run();
+                cBlock.Run(printF);
             }
         }
 

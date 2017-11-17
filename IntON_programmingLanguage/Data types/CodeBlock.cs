@@ -12,6 +12,7 @@ namespace IntON_programmingLanguage
         private Dictionary<string, double> variables;
         public delegate double VarGetter(string id);
         public delegate void VarAdder(string id, double value);
+        public delegate void OutputFunction(string text);
         private VarGetter getVar;
         private VarAdder setVar;
         private VarGetter getOutterVar;
@@ -33,7 +34,11 @@ namespace IntON_programmingLanguage
             }
             catch (KeyNotFoundException e)
             {
-                return getOutterVar(id);
+                if (getOutterVar != null)
+                {
+                    return getOutterVar(id);
+                }
+                throw new Exception("SYNTAX ERROR");
             }
         }
 
@@ -46,7 +51,7 @@ namespace IntON_programmingLanguage
             variables.Add(id, value);
         }
 
-        public void Run()
+        public void Run(CodeBlock.OutputFunction PrintF)
         {
 
             foreach(var item in statements)
@@ -55,9 +60,11 @@ namespace IntON_programmingLanguage
             }
             foreach (var item in statements)
             {
-                item.Run();
+                item.Run(PrintF);
             }
         }
+
+    
 
         public void SetDelegates(VarAdder adder, VarGetter getter)
         {
