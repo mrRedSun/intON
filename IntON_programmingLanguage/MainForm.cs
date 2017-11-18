@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace IntON_programmingLanguage
@@ -22,41 +23,46 @@ namespace IntON_programmingLanguage
 
         }
 
-        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             OutputTextbox.Clear();
-            CodeBlock.OutputFunction printF = OutputTextbox.AppendText;
-            string sourceCode = inputTextBox.Text;
-            Lexer lexer = null;
-            Parser parser = null;
-            try
+            await Task.Run(() =>
             {
-                lexer = new Lexer(sourceCode);
-            }
-            catch(Exception)
-            {
-                printF("Syntax error");
-                return;
-            }
+                CodeBlock.OutputFunction printF = OutputTextbox.AppendText;
+                string sourceCode = inputTextBox.Text;
+                Lexer lexer = null;
+                Parser parser = null;
+                try
+                {
+                    lexer = new Lexer(sourceCode);
+                }
+                catch (Exception)
+                {
+                    printF("Syntax error");
+                    return;
+                }
 
-            try
-            {
-                parser = new Parser(lexer.GetList);
-            }
-            catch(Exception)
-            {
-                printF("Parsing error");
-                return;
-            }
-            try
-            {
-                parser.GetProgram().Run(printF);
-            }
-            catch (Exception)
-            {
-                printF("Runtime error");
-                return;
-            }
+                try
+                {
+                    parser = new Parser(lexer.GetList);
+                }
+                catch (Exception)
+                {
+                    printF("Parsing error");
+                    return;
+                }
+                try
+                {
+                    parser.GetProgram().Run(printF);
+                }
+                catch (Exception)
+                {
+                    printF("Runtime error");
+                    return;
+                }
+            });
+            
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Threading;
 namespace IntON_programmingLanguage
 {
     class WhileStatement : ParsingUnit, IExecutable
@@ -19,11 +19,11 @@ namespace IntON_programmingLanguage
             cBlock = block;
         }
 
-        public void Run(CodeBlock.OutputFunction printF)
+        public async void Run(CodeBlock.OutputFunction printF)
         {
             cBlock.SetDelegates(adder, getter);
             lExpr.SetDelegate(getter);
-
+            
             while (lExpr.Evaluate().Value == 1)
             {
                 cBlock.Run(printF);
