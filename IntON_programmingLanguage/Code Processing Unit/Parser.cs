@@ -140,7 +140,7 @@ namespace IntON_programmingLanguage
             ICalculatable expr = ReduceExpression(); 
             string id = ((Token)parsingStack.Pop()).Id;
 
-            var reassignment = new VariableDeclaration(id, expr);
+            var reassignment = new VariableReassignment(id, expr);
 
             parsingStack.Push(reassignment);
         }

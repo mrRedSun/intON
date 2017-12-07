@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntON_programmingLanguage.Data_types
+namespace IntON_programmingLanguage
 {
     class VariableReassignment : ParsingUnit, IExecutable
     {
@@ -17,13 +17,14 @@ namespace IntON_programmingLanguage.Data_types
         {
             id = identifier;
             expr = expression;
+            Console.WriteLine("VarReassign usnoethu sanotehu snaotheus nathoesun htaoesnuth asonehtu snaoehusnaoheus nth\nsuanoehusnaoheusnaoe\thansoetuh\nanoeuhanoseu\n");
         }
 
 
         public void Run(CodeBlock.OutputFunction printF)
         {
             expr.SetDelegate(GetVar);
-            AddVar(id, expr.Evaluate().Value);
+            AddVar(id, expr.Evaluate().Value, true);
         }
 
         

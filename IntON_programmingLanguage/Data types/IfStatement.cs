@@ -24,7 +24,7 @@ namespace IntON_programmingLanguage
             cBlock.SetDelegates(adder, getter);
             lExpr.SetDelegate(getter);
 
-            if (lExpr.Evaluate().Value == 1)
+            if (lExpr.Evaluate().Type == Token_type.TRUE)
             {
                 cBlock.Run(printF);
             }

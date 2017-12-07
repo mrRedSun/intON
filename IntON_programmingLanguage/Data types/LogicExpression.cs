@@ -101,9 +101,10 @@ namespace IntON_programmingLanguage
 
         void DoOperator(Token opertr)
         {
-            double rVal = output.Pop().Value;
             double lVal = output.Pop().Value;
+            double rVal = output.Pop().Value;
 
+            Console.WriteLine($"{rVal}   {lVal}\n");
             switch (opertr.Type)
             {
                 case Token_type.EQUAL:
@@ -111,11 +112,11 @@ namespace IntON_programmingLanguage
                     else output.Push(new Token(Token_type.FALSE));
                     break;
                 case Token_type.LESS_THAN:
-                    if (rVal > lVal) output.Push(new Token(Token_type.TRUE));
+                    if (rVal < lVal) output.Push(new Token(Token_type.TRUE));
                     else output.Push(new Token(Token_type.FALSE));
                     break;
                 case Token_type.GREATER_THAN:
-                    if (rVal < lVal) output.Push(new Token(Token_type.TRUE));
+                    if (rVal > lVal) output.Push(new Token(Token_type.TRUE));
                     else output.Push(new Token(Token_type.FALSE));
                     break;
                 case Token_type.NOT_EQUAL:

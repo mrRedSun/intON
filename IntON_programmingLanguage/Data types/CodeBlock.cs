@@ -11,7 +11,7 @@ namespace IntON_programmingLanguage
         private List<IExecutable> statements;
         private Dictionary<string, double> variables;
         public delegate double VarGetter(string id);
-        public delegate void VarAdder(string id, double value);
+        public delegate void VarAdder(string id, double value, bool isReassignment = false);
         public delegate void OutputFunction(string text);
         private VarGetter getVar;
         private VarAdder setVar;
@@ -42,8 +42,23 @@ namespace IntON_programmingLanguage
             }
         }
 
-        private void AddVar(string id, double value)
+        private void AddVar(string id, double value, bool isReassignment = false)
         {
+            if (isReassignment == true)
+            {
+                Console.WriteLine("Mayje tut");
+                if (variables.TryGetValue(id, out double trash))
+                {
+                    variables[id] = value; return;
+                }
+                else
+                {
+                    Console.WriteLine("Tut");
+                    setOutterVar(id, value, true);
+                    return;
+                }
+            }
+            else
             if (variables.TryGetValue(id, out double trash))
             {
                 variables[id] = value; return;
